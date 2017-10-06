@@ -1,12 +1,52 @@
-// var randomRating = Math.random() * 10; //dealing cards one at a time
+var suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
 
-// //dealing for two inital cards
+var randomRating = Math.random() * 10; //dealing cards one at a time
 
-// function twoRandomScores(score1, score2) {
-//     return score1 + score2;
-// }
+var randomScore = Math.floor(Math.random()*52+1);
+console.log("I got the score " + randomScore);
 
+//dealing for two inital cards
+function twoRandomScores(score1, score2) {
+    return score1 + score2;
+}
 // twoRandomScores(2, 8);
+
+myArray[Math.floor(Math.random() * myArray.length)];
+
+
+// potential scoring system
+var deal = Math.floor(Math.random()*52+1);
+var final = deal % 13;
+
+if (deal > 1 && deal <= 13) {
+console.log(final);
+//console.log("I got "+ deal+ " of Hearts");
+
+}
+
+else if (deal > 14 && deal <= 26) {
+console.log(final);
+//console.log("I got "+ deal+ " of Diamonds");
+}
+
+else if (deal > 27 && deal <= 39) {
+console.log(final);
+//console.log("I got "+ deal+ " of Clubs")
+}
+
+else if (deal > 40 && deal <= 52 ) {
+console.log(final);
+//console.log("I got "+ deal+ "of Spades");
+}
+
+// assign correct blackjack to values
+var outcome = "";
+var deal = Math.floor(Math.random*40+1);
+if (deal % 2 === 0) {
+    var outcome = "even"
+} else {
+    var outcome ="odd"
+}
 
 // start game
 

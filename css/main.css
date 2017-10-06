@@ -1,0 +1,84 @@
+body {
+    align-content: center;
+    margin: auto;
+    width: 80%;
+    border: 3px solid #2E2CB3;
+    padding: 10px;
+}
+table {
+    align-content: center;
+    margin: auto;
+    /* width: 80%; */
+    border: 3px solid green;
+    border-collapse: seperate;
+    border-spacing: 20px 34px;
+}
+h1, h2 {
+    text-align: center;
+}
+td {
+    width: 180px;
+    height: 260px;
+    background-color: #36363d;
+    color: white;
+    text-align: center;
+}
+.dealer {
+    margin: 40px;
+    border: 3px solid green;
+    padding: 100px;
+    /* width: 80%; */
+}
+button {
+    overflow: hidden; 
+    margin: 10px;
+    padding: 12px 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 60ms ease-in-out;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none !important;
+    text-transform: none;
+    text-transform: capitalize;
+    color: #fff;
+    border: 0 none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 160px;
+    box-shadow: 2px 5px 10px rgba($dark, .1);
+  
+    &:hover {
+      transition: all 60ms ease;
+      opacity: .85;
+    }
+    
+    &:active {
+      transition: all 60ms ease;
+      opacity: .75;
+    }
+    
+    &:focus {
+      outline: 1px dotted #959595;
+      outline-offset: -4px;
+    }
+  }
+  .blue {
+    color: #fff;
+    background: #416dea;
+  }
+  .green {
+    color: #fff;
+    background: #3dd28d;
+  }
+  .salmon {
+    color: #fff;
+    background: #F32C52
+  }
