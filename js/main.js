@@ -4,11 +4,17 @@
 
 // display initial draw
 
-// Deck of cards
+// Deck of cards and variables
 var card = [];
+var player = [];
+var dealer = [];
+var cardCount = 0;
 var suits = ["spades", "diams", "clubs", "hearts"];
 var number = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 var display = document.getElementById("display");
+var dealerPlate = document.getElementById("dealerPlate");
+var playerPlate = document.getElementById("playerPlate");
+
 for (s in suits) { //for...in loop returns all enumerable properties (including non-interger names)
     var suit = suits[s][0].toUpperCase(); // pulling from array
     var bgColor = (suit == "S" || suit == "C") ? "black" : "red";
@@ -27,15 +33,56 @@ for (s in suits) { //for...in loop returns all enumerable properties (including 
     }
 }
 
-console.log(card);
 
 
-// Picking random card
-function randoCard() {
-var random = Math.floor(Math.random()*52) ;
-display.innerHTML += "<span style='color:" + card[random].bgcolor + "'>&" + card[random].icon + ";" + card[random].cardnum + "</span>  ";
+// Start game and pick random cards
+function Start() {
+// var random = Math.floor(Math.random()*52) ;
+// display.innerHTML += "<span style='color:" + card[random].bgcolor + "'>&" + card[random].icon + ";" + card[random].cardnum + "</span>  ";
+// }
+    // displayCard();
+    shuffle(card);
+    newDeal();
+    // displayCard();
 }
-randoCard();
+
+// Dealing new deck of cards
+function newDeal(){
+     player = [];
+     dealer = [];
+     dealerPlate.innerHTML = "";
+     playerPlate.innerHTML = "";
+     for(var x = 0; x < 2; x++){
+         dealer.push(card[cardCount]);
+         dealerPlate.innerHTML += cardOutput(cardCount);
+         cardCount++
+         player.push(card[cardCount]);
+         playerPlate.innerHTML += cardOutput(cardCount);
+         cardCount++
+     }
+     console.log(dealer);
+     console.log(player);
+}
+
+function cardOutput(n){
+    return "<span style='color:" + card[cardCount].bgcolor + "'>&" + card[cardCount].icon + ";" + card[cardCount].cardnum + "</span>  "
+}
+
+// Shuffle Deck
+function shuffle(array){
+ for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j]
+    array[j] = temp;
+ }
+ return array;
+}
+
+// Displaying cards for player and dealer
+function displayCard() {
+    display.innerHTML +=  "<span style='color:" + card[cardCount].bgcolor + "'>&" + card[cardCount].icon + ";" + card[cardCount].cardnum + "</span>  ";
+}
 
 
 // tally player and dealer score from initial draw
