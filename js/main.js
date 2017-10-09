@@ -1,56 +1,42 @@
-var suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
-
-var randomRating = Math.random() * 10; //dealing cards one at a time
-
-var randomScore = Math.floor(Math.random()*52+1);
-console.log("I got the score " + randomScore);
-
-//dealing for two inital cards
-function twoRandomScores(score1, score2) {
-    return score1 + score2;
-}
-// twoRandomScores(2, 8);
-
-myArray[Math.floor(Math.random() * myArray.length)];
-
-
-// potential scoring system
-var deal = Math.floor(Math.random()*52+1);
-var final = deal % 13;
-
-if (deal > 1 && deal <= 13) {
-console.log(final);
-//console.log("I got "+ deal+ " of Hearts");
-
-}
-
-else if (deal > 14 && deal <= 26) {
-console.log(final);
-//console.log("I got "+ deal+ " of Diamonds");
-}
-
-else if (deal > 27 && deal <= 39) {
-console.log(final);
-//console.log("I got "+ deal+ " of Clubs")
-}
-
-else if (deal > 40 && deal <= 52 ) {
-console.log(final);
-//console.log("I got "+ deal+ "of Spades");
-}
-
-// assign correct blackjack to values
-var outcome = "";
-var deal = Math.floor(Math.random*40+1);
-if (deal % 2 === 0) {
-    var outcome = "even"
-} else {
-    var outcome ="odd"
-}
+// alert("working");
 
 // start game
 
 // display initial draw
+
+// Deck of cards
+var card = [];
+var suits = ["spades", "diams", "clubs", "hearts"];
+var number = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+var display = document.getElementById("display");
+for (s in suits) { //for...in loop returns all enumerable properties (including non-interger names)
+    var suit = suits[s][0].toUpperCase(); // pulling from array
+    var bgColor = (suit == "S" || suit == "C") ? "black" : "red";
+    for (n in number) {
+    // display.innerHTML += "<span style='color:" + bgColor + "'>&" + suits[s] + ";" + number[n] + "</span> ";    
+// Card OBJECT build to utilize card and output to HTML
+    var cardValue = (n > 9) ? 10 : parseInt(n) + 1;
+    var cardSuit = {
+        suit: suit,
+        icon: suits[s],
+        bgcolor: bgColor,
+        cardnum: number[n],
+        cardvalue: cardValue
+    }
+    card.push(cardSuit);
+    }
+}
+
+console.log(card);
+
+
+// Picking random card
+function randoCard() {
+var random = Math.floor(Math.random()*52) ;
+display.innerHTML += "<span style='color:" + card[random].bgcolor + "'>&" + card[random].icon + ";" + card[random].cardnum + "</span>  ";
+}
+randoCard();
+
 
 // tally player and dealer score from initial draw
     // both player and dealer should have arry[0] for 5 cards
@@ -120,3 +106,26 @@ if (deal % 2 === 0) {
         // hat's off to resources
         // inspiration
     
+
+
+// init() {
+//     var cardsShuffle = 52;
+//     var shuffle = new Array (52);
+//     deck.forEach(function(card) {
+//         shuffle[randomNumber] = card;
+//     })
+// }
+
+// var deck = [];
+// obj {
+//     suit
+//     value
+//     number
+// }
+
+// deck = [1, 2, 3, 4, 5];
+// cardsShuffle = 52;
+// var shuffled = [];
+// for(var i = 0; i < 52; i++){
+//     shuffled.push(deck.splice(randomNumber(0, deck.length -1)));
+// }
