@@ -1,11 +1,70 @@
 #display {
     font-size: 30px;
 }
+#hide {
+    height: 180px;
+    width: 140px;
+    background-color: darkblue;
+    border-radius: 10px;
+    position: absolute;
+    border: 1px solid black;
+    padding: 3px;
+}
+#btndeal, #myactions {
+    display: none;
+}
+.icard {
+    height: 180px;
+    width: 140px;
+    padding: 3px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    left: 100px;
+    display: inline-block;
+    font-family: 'Times New Roman';
+}
+.top-card {
+    font-size: 30px;
+    line-height: 20px;
+    left: 2px;
+    top: 2px;
+}
+.middle-card {
+    text-align: center;
+    font-size: 70px;
+}
+.bottom-card {
+    font-size: 30px;
+    line-height: 20px;
+    right: 2px;
+    bottom: 2px;
+    transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+}
 .clubs, .spades {
     color: black;
 }
 .hearts, .diams {
     color: red;
+}
+.hearts .suit::after{
+    content: '\2665'
+}
+.diams .suit::after{
+    content: '\2666'
+}
+.spades .suit::after{
+    content: '\2660'
+}
+.clubs .suit::after{
+    content: '\2663'
+}
+#dealerPlate, #playerPlate {
+    height: 210px;
+    width: 600px;
 }
 body {
     align-content: center;
@@ -17,7 +76,7 @@ body {
 table {
     align-content: center;
     margin: auto;
-    /* width: 80%; */
+    width: 80%;
     border: 3px solid green;
     border-collapse: seperate;
     border-spacing: 20px 34px;
@@ -31,12 +90,6 @@ td {
     background-color: #36363d;
     color: white;
     text-align: center;
-}
-.dealer {
-    margin: 40px;
-    border: 3px solid green;
-    padding: 100px;
-    /* width: 80%; */
 }
 button {
     overflow: hidden; 

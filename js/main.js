@@ -1,24 +1,24 @@
 // alert("working");
 
-// start game
-
-// display initial draw
 
 // Deck of cards and variables
 var card = [];
 var player = [];
 var dealer = [];
 var cardCount = 0;
+var dollars = 1000;
 var suits = ["spades", "diams", "clubs", "hearts"];
 var number = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-var display = document.getElementById("display");
-var dealerPlate = document.getElementById("dealerPlate");
-var playerPlate = document.getElementById("playerPlate");
+var message = document.getElementById('message');
+var display = document.getElementById('display');
+var dealerPlate = document.getElementById('dealerPlate');
+var playerPlate = document.getElementById('playerPlate');
 
 for (s in suits) { //for...in loop returns all enumerable properties (including non-interger names)
     var suit = suits[s][0].toUpperCase(); // pulling from array
     var bgColor = (suit == "S" || suit == "C") ? "black" : "red";
-    for (n in number) {
+
+for (n in number) {
     // display.innerHTML += "<span style='color:" + bgColor + "'>&" + suits[s] + ";" + number[n] + "</span> ";    
 // Card OBJECT build to utilize card and output to HTML
     var cardValue = (n > 9) ? 10 : parseInt(n) + 1;
@@ -34,39 +34,64 @@ for (s in suits) { //for...in loop returns all enumerable properties (including 
 }
 
 
-
 // Start game and pick random cards
-function Start() {
+function start() {
 // var random = Math.floor(Math.random()*52) ;
 // display.innerHTML += "<span style='color:" + card[random].bgcolor + "'>&" + card[random].icon + ";" + card[random].cardnum + "</span>  ";
 // }
     // displayCard();
     shuffle(card);
     newDeal();
-    // displayCard();
+    document.getElementById('start').style.display = 'none'; //hide start button after user clicks
+    document.getElementById('dollar').innerHTML = dollars;
 }
 
-// Dealing new deck of cards
+// Dealing new deck of cards, initial draw
 function newDeal(){
      player = [];
      dealer = [];
      dealerPlate.innerHTML = "";
      playerPlate.innerHTML = "";
+
+   // Pulling info from HTML to perform actions
+    var betValue = document.getElementById('playerBet').value; //picks up value of player's bet
+    dollars = dollars-betValue;
+    document.getElementById('dollar').innerHTML = dollars;
+    document.getElementById('myactions').style.display = 'block'; //makes action buttons show
+    message.innerHTML = "Get Lucky and beat the dealer to win.<br>Current bet is $"+betValue; // bet message
+    document.getElementById('playerBet').disabled = true; //disables bet input field
+    document.getElementById('max').disabled = true; //disables max button
+    deal(); // invoke deal function to reshuffle
+}
+
+// Contents of deal
+function deal(){
+    console.log(card);
+    //card count reshuffle
      for(var x = 0; x < 2; x++){
          dealer.push(card[cardCount]);
-         dealerPlate.innerHTML += cardOutput(cardCount);
+         dealerPlate.innerHTML += cardOutput(cardCount, x);
+         if (x == 0) {
+            dealerPlate.innerHTML += '<div id="hide" style="left:100px;"></div>';
+         }
          cardCount++
          player.push(card[cardCount]);
-         playerPlate.innerHTML += cardOutput(cardCount);
+         playerPlate.innerHTML += cardOutput(cardCount, x);
          cardCount++
      }
      console.log(dealer);
      console.log(player);
 }
 
-function cardOutput(n){
-    return "<span style='color:" + card[cardCount].bgcolor + "'>&" + card[cardCount].icon + ";" + card[cardCount].cardnum + "</span>  "
-}
+
+
+// For symbols on card
+function cardOutput(n, x){
+    var position = (x > 0) ? x*60+100 : 100;
+    return '<div class="icard ' + card[n].icon + '" style="left:' + position + 'px;">  <div class="top-card suit">' + card[n].cardnum + '<br></div>  <div class="middle-card suit"></div>  <div class="bottom-card suit">' + card[n].cardnum +
+    '<br></div> </div>';
+}   
+
 
 // Shuffle Deck
 function shuffle(array){
@@ -81,7 +106,7 @@ function shuffle(array){
 
 // Displaying cards for player and dealer
 function displayCard() {
-    display.innerHTML +=  "<span style='color:" + card[cardCount].bgcolor + "'>&" + card[cardCount].icon + ";" + card[cardCount].cardnum + "</span>  ";
+    display.innerHTML +=  "<span style='color:" + card[cardCount].bgcolor + "'>" + card[cardCount].cardnum + "&" + card[cardCount].icon + ";</span>  ";
 }
 
 

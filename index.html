@@ -10,38 +10,33 @@
 </head>
 <body>
     <h1>CatJacks</h1>
-    <div id="message">Start Button</div>
-        <div id="start">
-            <button id="startbtn" type="button" onclick="Start()" class="btn">Start CatJacks</button>
+ 
+        <div><small>Get to 21 or higher than the dealer</small>
+            <div id="message">Start Button</div>
+            <div id="start">
+                <button id="startbtn" type="button" onclick="start()" class="green">Start CatJacks</button>
+            </div>
+        <div class="total">Total $<span id="dollar">1000</span></div>
+        <div>Bet Amount $<input type="number" id="playerBet" value="10" min="10" max="1000">
+            <button id="max" type="button" onclick="maxbet()" class="salmon">Max Bet</button></div>
         </div>
-    <div id="display"></div>
-    Dealer Hand: <div id="dealerPlate"></div>
-    Player Hand: <div id="playerPlate"></div>
-<!-- 
-    <table>
-        <h2>Dealer</h2>
-        <tr class="dealer">
-            <td><img src="http://placekitten.com/g/180/260"card>card facing up</td>
-            <td><img src="http://placekitten.com/g/180/260"card>card face down</td>
-            <td><img src="http://placekitten.com/g/180/260"card>card</td>
-            <td><img src="http://placekitten.com/g/180/260"card>card</td>
-            <td><img src="http://placekitten.com/g/180/260"card>card</td>
-        </tr>
-        <tr class="player">
-            <td>card face up</td>
-            <td>card face up</td>
-            <td>card</td>
-            <td>card</td>
-            <td>card</td>
-        </tr>
-    </table>
-    <h2>Player</h2> -->
 
-    <button class='blue'>HIT</button>
-    <button class='salmon'>STAND</button>
-    <button class='green'>DEAL</button>
-    
-    
+        <div>
+            <button id="btndeal" type="button" onclick="newDeal()" class='green'>DEAL</button>
+        </div>
+
+    <div id="display"></div>
+    Dealer Hand: <span id="dValue"></span>
+    <div id="dealerPlate"></div>
+    Player Hand: <span id="pValue"></span>
+    <div id="playerPlate"></div>
+   
+    <div id="myactions">
+    <button id="btnhold" type="button" onclick="cardAction('hold')" class='green'>HOLD</button>
+    <button id="btnhit" type="button" onclick="cardAction('hit')" class='salmon'>HIT</button>
+    <button id="btndbl" type="button" onclick="cardAction('dbl')" class='blue'>DOUBLE</button>
+    </div>
+
     <script src="js/main.js"></script>
 </body>
 </html>
