@@ -7,12 +7,16 @@ var player = [];
 var dealer = [];
 var cardCount = 0;
 var dollars = 1000;
+var endGame = false;
 var suits = ["spades", "diams", "clubs", "hearts"];
 var number = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 var message = document.getElementById('message');
 var display = document.getElementById('display');
 var dealerPlate = document.getElementById('dealerPlate');
 var playerPlate = document.getElementById('playerPlate');
+var pValue = document.getElementById('pValue');
+var dValue = document.getElementById('dValue');
+var dollarValue = document.getElementById('dollar');
 
 for (s in suits) { //for...in loop returns all enumerable properties (including non-interger names)
     var suit = suits[s][0].toUpperCase(); // pulling from array
@@ -55,7 +59,7 @@ function newDeal(){
 
    // Pulling info from HTML to perform actions
     var betValue = document.getElementById('playerBet').value; //picks up value of player's bet
-    dollars = dollars-betValue;
+    dollars = dollars - betValue;
     document.getElementById('dollar').innerHTML = dollars;
     document.getElementById('myactions').style.display = 'block'; //makes action buttons show
     message.innerHTML = "Get Lucky and beat the dealer to win.<br>Current bet is $"+betValue; // bet message
@@ -79,19 +83,118 @@ function deal(){
          playerPlate.innerHTML += cardOutput(cardCount, x);
          cardCount++
      }
+     pValue.innerHTML = total(player);
      console.log(dealer);
      console.log(player);
 }
 
 
-
 // For symbols on card
 function cardOutput(n, x){
-    var position = (x > 0) ? x*60+100 : 100;
+    var position = (x > 0) ? x * 60 + 100 : 100;
     return '<div class="icard ' + card[n].icon + '" style="left:' + position + 'px;">  <div class="top-card suit">' + card[n].cardnum + '<br></div>  <div class="middle-card suit"></div>  <div class="bottom-card suit">' + card[n].cardnum +
     '<br></div> </div>';
-}   
+}  
 
+
+// Player actions for buttons
+function cardAction(a){
+    console.log(a);
+    switch (a) {
+        case 'hit' :
+            playCard(); //add new card to player's hand
+        break;
+        case 'hold' :
+            playEnd(); //play out and calculate
+        break;
+        case 'double' : // double bet amount for player and remove value from dollars
+            playCard();
+            playEnd(); 
+        break;
+        default:
+            console.log('end');
+            playEnd();
+    }
+}
+
+//Grabs next card and pushes to player's array for HIT
+function playCard() { 
+    player.push(card[cardCount]);
+    playerPlate.innerHTML += cardOutput(cardCount, (player.length - 1)); // positions next card for 'hit'
+    cardCount++;
+    var current = total(player); //checks total of player's hand
+    pValue.innerHTML = current;
+    if (current > 21) {
+        message.innerHTML = "Busted!";
+        playEnd();
+    }
+}
+
+// End game for player
+function playEnd() {
+    endGame = true;
+    document.getElementById('hide').style.display = 'none';
+    document.getElementById('myactions').style.display = 'none';
+    document.getElementById('btndeal').style.display = 'block';
+    document.getElementById('playerBet').disabled = false; 
+    document.getElementById('max').disabled = false;
+    message.innerHTML = "Deal Again!";
+    var payout = 1;
+    // checks dealer's score
+    var dealerValue = total(dealer);
+    dValue.innerHTML = dealerValue;
+
+    while (dealerValue < 17) { //check values of the dealer card to determine to draw more cards
+        dealer.push(card[cardCount]);
+        dealerPlate.innerHTML += cardOutput(cardCount, (dealer.length - 1)); 
+        cardCount++;
+        dealerValue = total(dealer);
+        dValue.innerHTML = dealerValue;
+    }
+    // check to see if dealer or player wins
+    var playerValue = total(player);
+        if (playerValue == 21 && player.length == 21) {
+        message.innerHTML = "Player BlackJack";
+        payout = 1.5;
+    }
+    var betValue = parseInt(document.getElementById('playerBet').value)*payout;
+        if ((playerValue < 22 && dealerValue < playerValue) || (dealerValue > 21 && playerValue < 22)) {
+            message.innerHTML += '<span style="color:green;">CONGRATS! You won $'+betValue+'</span>';
+            dollars = dollars + (betValue * 2);
+        } //check if dealer wins
+        else if (playerValue > 21) {
+            message.innerHTML += '<span style="color:red;">Dealer Wins! You lost $'+betValue+'</span>';
+        }
+        else if (playerValue == dealerValue) {
+            message.innerHTML += '<span style="color:purple;">PUSH!</span>';
+            dollars = dollars + betValue;
+        }
+        else {
+            message.innerHTML += '<span style="color:red;">Dealer Wins! You lost $'+betValue+'</span>';
+        }
+
+    pValue.innerHTML = dealerValue;
+    dollarValue.innerHTML = dollars;
+}
+
+// Checks total score and ACE adjustment
+function total(argu){
+    var current = 0; // loops thru array and has a value to hold
+    var aceAdjust = false;
+    //if ACE is detected, take the value and equal to 11
+    for(var i in argu) {
+        if (argu[i].cardnum == 'A' && !aceAdjust) { 
+            aceAdjust = true;
+            current = current + 10;
+        }
+        current = current + argu[i].cardvalue;
+    }
+    if( aceAdjust && current > 21){
+        current = current - 10;  
+    }
+    return current;
+}
+ 
 
 // Shuffle Deck
 function shuffle(array){

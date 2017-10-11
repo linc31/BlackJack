@@ -21,9 +21,6 @@
             <button id="max" type="button" onclick="maxbet()" class="salmon">Max Bet</button></div>
         </div>
 
-        <div>
-            <button id="btndeal" type="button" onclick="newDeal()" class='green'>DEAL</button>
-        </div>
 
     <div id="display"></div>
     Dealer Hand: <span id="dValue"></span>
@@ -34,8 +31,11 @@
     <div id="myactions">
     <button id="btnhold" type="button" onclick="cardAction('hold')" class='green'>HOLD</button>
     <button id="btnhit" type="button" onclick="cardAction('hit')" class='salmon'>HIT</button>
-    <button id="btndbl" type="button" onclick="cardAction('dbl')" class='blue'>DOUBLE</button>
+    <button id="btndbl" type="button" onclick="cardAction('double')" class='blue'>DOUBLE</button>
     </div>
+    <div>
+            <button id="btndeal" type="button" onclick="newDeal()" class='green'>DEAL</button>
+        </div>
 
     <script src="js/main.js"></script>
 </body>
