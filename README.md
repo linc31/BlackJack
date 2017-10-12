@@ -27,4 +27,4 @@ Following rules for the dealer:
 - [Trello](https://trello.com/b/887TryzF/proj1blackjack)
 
 # Demo Game
-[BlackJack](https://linc31.github.io/BlackJack/)
+Demo[BlackJack](https://linc31.github.io/BlackJack/)
