@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <title>BlackJack</title>
 </head>
+
 <body>
-    <h1><img src="imgs/blackjack.svg" width="600" height="90"></h1>
- 
-        <div>
-            <div id="message"></div>
-            <div id="start">
-                <button id="startbtn" type="button" onclick="start()" class="green">Start BlackJack</button>
-            </div>
-        
-            <div>Bet Amount $<input type="number" id="playerBet" value="10" min="10" max="1000">
-            <button id="max" type="button" onclick="maxbet()" class="drkblue">Max Bet</button></div>
-
-            <div class="total">Total $<span id="dollar">1000</span></div>
-        
-        </div>
-
-        <table>
-        <div id="display">
-       <center> Dealer Hand: <span id="dValue"></span> </center>
-        <div id="dealerPlate"></div>
-        <div id="playerPlate"></div>
-        <center>Player Hand: <span id="pValue"></span></center>
-    </div>
-</table>
-
-    <center><div id="myactions">
-    <button id="btnhold" type="button" onclick="cardAction('hold')" class='yellow'>HOLD</button>
-    <button id="btnhit" type="button" onclick="cardAction('hit')" class='green'>HIT</button>
-    <button id="btndbl" type="button" onclick="cardAction('double')" class='salmon'>DOUBLE</button>
-    </div>
-    <div>
-            <button id="btndeal" type="button" onclick="newDeal()" class='green'>DEAL</button>
+    <h1><img src="imgs/blackjack.svg" width="650" height="95"></h1>
+    <div id="message"></div>
+    <center>
+        <div id="start">
+            <button id="startbtn" type="button" onclick="start()" class="start">Start BlackJack</button>
         </div>
     </center>
 
+    <div id="display">
+        <div id="bet">
+            <div>Bet Amount $<input type="number" id="playerBet" value="10" min="10" max="1000">
+                <button id="max" type="button" onclick="maxbet()" class="drkblue">Max Bet</button></div>
+            <div class="total">Total $<span id="dollar">1000</span></div>
+        </div>
+
+        <center> Dealer Hand: <span id="dValue"></span> </center>
+        <div id="dealerPlate"></div>
+        <div id="playerPlate"></div>
+        <center>Player Hand: <span id="pValue"></span></center>
+
+        <center>
+            <div id="myactions">
+                <button id="btnhold" type="button" onclick="cardAction('hold')" class='yellow'>STAND</button>
+                <button id="btnhit" type="button" onclick="cardAction('hit')" class='green'>HIT</button>
+                <button id="btndbl" type="button" onclick="cardAction('double')" class='salmon'>DOUBLE</button>
+            </div>
+            <div>
+                <button id="btndeal" type="button" onclick="newDeal()" class='green'>DEAL</button>
+            </div>
+        </center>
+    </div>
+
+
     <script src="js/main.js"></script>
 </body>
+
 </html>
