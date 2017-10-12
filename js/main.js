@@ -1,5 +1,3 @@
-// alert("working");
-
 
 // Deck of cards and variables
 var card = [];
@@ -11,12 +9,18 @@ var endGame = false;
 var suits = ["spades", "diams", "clubs", "hearts"];
 var number = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 var message = document.getElementById('message');
-var display = document.getElementById('display');
+var display = document.getElementById('display').style.justifyContent = "center";
 var dealerPlate = document.getElementById('dealerPlate');
 var playerPlate = document.getElementById('playerPlate');
 var pValue = document.getElementById('pValue');
 var dValue = document.getElementById('dValue');
 var dollarValue = document.getElementById('dollar');
+
+document.getElementById('playerBet').onchange = function(){
+    if (this.value < 0){this.value = 0;}
+    if (this.value > dollars){this.value = dollars;}
+    message.innerHTML = "Bet changed to $"+this.value;
+}
 
 for (s in suits) { //for...in loop returns all enumerable properties (including non-interger names)
     var suit = suits[s][0].toUpperCase(); // pulling from array
@@ -43,7 +47,6 @@ function start() {
 // var random = Math.floor(Math.random()*52) ;
 // display.innerHTML += "<span style='color:" + card[random].bgcolor + "'>&" + card[random].icon + ";" + card[random].cardnum + "</span>  ";
 // }
-    // displayCard();
     shuffle(card);
     newDeal();
     document.getElementById('start').style.display = 'none'; //hide start button after user clicks
@@ -52,6 +55,7 @@ function start() {
 
 // Dealing new deck of cards, initial draw
 function newDeal(){
+     dValue.innerHTML = "?";
      player = [];
      dealer = [];
      dealerPlate.innerHTML = "";
@@ -66,11 +70,21 @@ function newDeal(){
     document.getElementById('playerBet').disabled = true; //disables bet input field
     document.getElementById('max').disabled = true; //disables max button
     deal(); // invoke deal function to reshuffle
+    document.getElementById('btndeal').style.display = 'none';
+}
+
+function redeal(){
+    cardCount++;
+    if(cardCount > 30){
+    console.log("NEW DECK");
+    shuffle(card);
+    cardCount = 0;
+    message.innerHTML = "New Shuffle";
+    }
 }
 
 // Contents of deal
 function deal(){
-    console.log(card);
     //card count reshuffle
      for(var x = 0; x < 2; x++){
          dealer.push(card[cardCount]);
@@ -78,14 +92,12 @@ function deal(){
          if (x == 0) {
             dealerPlate.innerHTML += '<div id="hide" style="left:100px;"></div>';
          }
-         cardCount++
+         redeal();
          player.push(card[cardCount]);
          playerPlate.innerHTML += cardOutput(cardCount, x);
-         cardCount++
+         redeal();
      }
      pValue.innerHTML = total(player);
-     console.log(dealer);
-     console.log(player);
 }
 
 
@@ -95,6 +107,12 @@ function cardOutput(n, x){
     return '<div class="icard ' + card[n].icon + '" style="left:' + position + 'px;">  <div class="top-card suit">' + card[n].cardnum + '<br></div>  <div class="middle-card suit"></div>  <div class="bottom-card suit">' + card[n].cardnum +
     '<br></div> </div>';
 }  
+
+// Max bet logic
+function maxbet (){
+    document.getElementById('playerBet').value = dollars;
+    message.innerHTML = "Bet changed to $"+dollars;
+}
 
 
 // Player actions for buttons
@@ -108,6 +126,16 @@ function cardAction(a){
             playEnd(); //play out and calculate
         break;
         case 'double' : // double bet amount for player and remove value from dollars
+            var betValue = parseInt(document.getElementById('playerBet').value);
+            if ((dollars - betValue) < 0) {
+                betValue = betValue + dollars;
+                dollars = 0;
+            } else {
+                dollars = dollars - betValue;
+                betValue = betValue*2;
+            }
+            document.getElementById('dollar').innerHTML = dollars;
+            document.getElementById('playerBet').value = betValue;
             playCard();
             playEnd(); 
         break;
@@ -121,7 +149,7 @@ function cardAction(a){
 function playCard() { 
     player.push(card[cardCount]);
     playerPlate.innerHTML += cardOutput(cardCount, (player.length - 1)); // positions next card for 'hit'
-    cardCount++;
+    redeal();
     var current = total(player); //checks total of player's hand
     pValue.innerHTML = current;
     if (current > 21) {
@@ -138,7 +166,7 @@ function playEnd() {
     document.getElementById('btndeal').style.display = 'block';
     document.getElementById('playerBet').disabled = false; 
     document.getElementById('max').disabled = false;
-    message.innerHTML = "Deal Again!";
+    message.innerHTML = "Deal Again!<br>";
     var payout = 1;
     // checks dealer's score
     var dealerValue = total(dealer);
@@ -147,7 +175,7 @@ function playEnd() {
     while (dealerValue < 17) { //check values of the dealer card to determine to draw more cards
         dealer.push(card[cardCount]);
         dealerPlate.innerHTML += cardOutput(cardCount, (dealer.length - 1)); 
-        cardCount++;
+        redeal();
         dealerValue = total(dealer);
         dValue.innerHTML = dealerValue;
     }
@@ -173,7 +201,7 @@ function playEnd() {
             message.innerHTML += '<span style="color:red;">Dealer Wins! You lost $'+betValue+'</span>';
         }
 
-    pValue.innerHTML = dealerValue;
+    pValue.innerHTML = playerValue;
     dollarValue.innerHTML = dollars;
 }
 
@@ -182,14 +210,14 @@ function total(argu){
     var current = 0; // loops thru array and has a value to hold
     var aceAdjust = false;
     //if ACE is detected, take the value and equal to 11
-    for(var i in argu) {
+    for(var i in argu) { // loop thru all cards that player has
         if (argu[i].cardnum == 'A' && !aceAdjust) { 
             aceAdjust = true;
             current = current + 10;
         }
         current = current + argu[i].cardvalue;
     }
-    if( aceAdjust && current > 21){
+    if (aceAdjust && current > 21){
         current = current - 10;  
     }
     return current;

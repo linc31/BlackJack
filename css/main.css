@@ -1,35 +1,49 @@
 #display {
     font-size: 30px;
+    position: center;
+    flex-flow: center;
+    background: radial-gradient(#03B674,#036656);
+    padding: 8px;
+    border-radius: 5px;
 }
 #hide {
-    height: 180px;
-    width: 140px;
-    background-color: darkblue;
-    border-radius: 10px;
+    height: 170px;
+    width: 130px;
+    background-color: #353740;
+    background-image: url("file:///Users/linc/Documents/Projects/BlackJack/imgs/blue.svg");
+    border-radius: 5px;
     position: absolute;
-    border: 1px solid black;
+    border: 1px solid #353740;
     padding: 3px;
+    margin: 0 620px;
 }
 #btndeal, #myactions {
     display: none;
 }
+#playerBet {
+    font-size: 20px;
+}
 .icard {
-    height: 180px;
-    width: 140px;
+    height: 170px;
+    width: 130px;
     padding: 3px;
-    border: 1px solid black;
+    border: 1px solid #353740;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     position: absolute;
-    left: 100px;
+    /* left: 100px; */
+    margin: 0 620px;
     display: inline-block;
     font-family: 'Times New Roman';
+    -webkit-box-shadow: -3px 0px 20px -4px rgba(33,33,33,0.82);
+    -moz-box-shadow: -3px 0px 20px -4px rgba(33,33,33,0.82);
+    box-shadow: -3px 0px 20px -4px rgba(33,33,33,0.82);
 }
 .top-card {
     font-size: 30px;
-    line-height: 20px;
-    left: 2px;
-    top: 2px;
+    line-height: 22px;
+    left: 4px;
+    top: 4px;
 }
 .middle-card {
     text-align: center;
@@ -37,18 +51,18 @@
 }
 .bottom-card {
     font-size: 30px;
-    line-height: 20px;
-    right: 2px;
-    bottom: 2px;
+    line-height: 22px;
+    right: 4px;
+    bottom: 4px;
     transform: rotate(-180deg);
     -webkit-transform: rotate(-180deg);
     -moz-transform: rotate(-180deg);
 }
 .clubs, .spades {
-    color: black;
+    color: #353740;
 }
 .hearts, .diams {
-    color: red;
+    color: #C52E1C;
 }
 .hearts .suit::after{
     content: '\2665'
@@ -65,31 +79,22 @@
 #dealerPlate, #playerPlate {
     height: 210px;
     width: 600px;
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 body {
     align-content: center;
     margin: auto;
     width: 80%;
-    border: 3px solid #2E2CB3;
-    padding: 10px;
+    /* background-color: #A1B0B0; */
+    background-color: #6bb790;
 }
 table {
-    align-content: center;
-    margin: auto;
-    width: 80%;
-    border: 3px solid green;
-    border-collapse: seperate;
-    border-spacing: 20px 34px;
+    flex-flow: center;
 }
 h1, h2 {
     text-align: center;
-}
-td {
-    width: 180px;
-    height: 260px;
-    background-color: #36363d;
-    color: white;
-    text-align: center;
+    padding: 8px;
 }
 button {
     overflow: hidden; 
@@ -101,7 +106,6 @@ button {
     text-align: center;
     white-space: nowrap;
     text-decoration: none !important;
-    text-transform: none;
     text-transform: capitalize;
     color: #fff;
     border: 0 none;
@@ -112,9 +116,7 @@ button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    justify-content: center;
-    align-items: center;
-    flex: 0 0 160px;
+    flex: 0 0 160px; 
     box-shadow: 2px 5px 10px rgba($dark, .1);
   
     &:hover {
@@ -138,9 +140,17 @@ button {
   }
   .green {
     color: #fff;
-    background: #3dd28d;
+    background: #03B674;
   }
   .salmon {
     color: #fff;
-    background: #F32C52
+    background: #EF4850;
+  }
+  .yellow {
+    color: #fff;
+    background: #F1C40F;
+  }
+  .drkblue {
+    color: #fff;
+    background: #34495E;
   }
