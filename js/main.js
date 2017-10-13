@@ -72,7 +72,6 @@ function newDeal() {
 function redeal() {
     cardCount++;
     if (cardCount > 30) {
-        console.log("NEW DECK");
         shuffle(card);
         cardCount = 0;
         message.innerHTML = "New Shuffle";
@@ -113,7 +112,6 @@ function maxbet() {
 
 // Player actions for buttons
 function cardAction(a) {
-    console.log(a);
     switch (a) {
         case 'hit':
             playCard(); //add new card to player's hand
@@ -136,7 +134,6 @@ function cardAction(a) {
             playEnd();
             break;
         default:
-            console.log('end');
             playEnd();
     }
 }
