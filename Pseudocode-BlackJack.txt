@@ -1,0 +1,67 @@
+
+
+// tally player and dealer score from initial draw
+    // both player and dealer should have up to 5 cards
+    // dealer has one card face down, one face up
+    // player has both card face up
+
+// actions to be enabled
+    // dealing cards from deck
+    // adding two cards to player's hand
+    // having player hit or stand
+    // begin round
+    // end round with score
+    // shuffle deck
+
+// if dealer or player > 21, bust
+    // if d or p has ACE and 4, soft 15
+    // if d or p has hand of 10, bust - 'hard' hand
+
+// card logic
+    // if player has cards(*2) = 17-21, stand
+    // if player has cards(*2) = 2-16, hit
+    // if first two cards = 9-11, double down (add bet of >= to current..will receive one additional card)
+    // may double down on hard 12 || >
+
+// dealer loop
+    // if dealer has blackjack, player LOSE
+    // break loop
+        // else dealer keeps drawing til 17 or bust
+    // if dealer has 22 || >, BUST
+        // else if dealer is 17 || > , dealer stands
+
+// player loop
+    // if player has blackjack, player WINS
+    // break player loop
+        // else if player draws 17-21, stand
+    // if player has 22 >, bust
+        // else if player is < 17, stand or hit
+
+// compare hands
+    // closer to 21, wins
+    // if game ==, game is PUSH
+    // if dealer and player has blackjack, PUSH
+    // re-shuffle deck
+    // deal again
+
+// ace = 1 or 11
+// 2-9 == exact
+// J, Q, K = 10
+
+// nice to haves (icebox)
+    // monies / chips for players
+    // betting monies 
+    // allow player to surrender after first two cards / lose bet
+    // score keeping of player vs dealer
+
+//read.md draft
+    // proj description
+    // showcase screenshots of tests and explain why
+        // break down into end to end test
+        // code tests
+    // showcase process
+    // built with...html, css, js, jq
+    // versioning via git repo
+    // acknowledgements
+        // hat's off to resources
+        // inspiration
